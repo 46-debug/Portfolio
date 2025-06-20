@@ -24,3 +24,120 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+#heading {
+  color: #D2D2D2;
+  text-shadow: 4px 4px 0px #000;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #000;
+  text-align: center;
+}
+
+#heading span {
+  background: linear-gradient(90deg, #0084FF 0.29%, #9DD0FF 47.43%, #004F99 99.51%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: #CC94C5;
+}
+
+@keyframes scaleRotate_z {
+  0% {
+    filter: drop-shadow(0px 0px 20px #FFF);
+  }
+
+  50% {
+    filter: drop-shadow(0px 0px 0px #FFF);
+  }
+
+  100% {
+    filter: drop-shadow(0px 0px 20px #FFF);
+  }
+}
+
+.glowPath {
+  stroke-dasharray: 1000;
+  animation: glow 2s linear infinite;
+}
+
+@keyframes glow {
+  0% {
+    stroke-dashoffset: 1000;
+  }
+
+  50% {
+    stroke-dashoffset: 0;
+  }
+
+  100% {
+    stroke-dashoffset: -1000;
+  }
+}
+
+
+#text {
+  animation: flicker 2s infinite;
+}
+
+@keyframes flicker {
+
+  0%,
+  19%,
+  21%,
+  23%,
+  25%,
+  54%,
+  56%,
+  100% {
+    opacity: 1;
+    text-shadow: _0px_0px_20px_rgb(255_255_255_/_1.00);
+  }
+
+  20%,
+  24%,
+  55% {
+    opacity: 0.5;
+    text-shadow: none;
+  }
+
+  22%,
+  26%,
+  57% {
+    opacity: 0.2;
+    text-shadow: 0 0 5px #fff;
+  }
+}
+
+
+#text1 {
+  color: #FBF7EE;
+  font-family: "Big Shoulders Display";
+  font-size: clamp(40px, 12vw, 200px);
+  padding: 0px 0px 0px 25px;
+}
+
+#text2 {
+  color: #27272a;
+  font-family: "Big Shoulders Display";
+  font-size: clamp(40px, 12vw, 200px);
+  padding: 0px 0px 0px 25px;
+}
+
+#text_2 {
+  background: linear-gradient(90deg, #8B8B8B 0%, #FFF 50.48%, #8B8B8B 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#text_1 {
+  line-height: normal;
+  background: radial-gradient(67.75% 67.75% at 50.15% 47.25%, #38182F 0%, #A8008C 50%, #38182F 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#star {
+  animation: scaleRotate_z 3s ease 3;
+  filter: drop-shadow(0px 0px 20px #FFF);
+}
