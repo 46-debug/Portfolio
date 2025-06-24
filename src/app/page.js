@@ -7,13 +7,16 @@ import Footer from './Components/Footer';
 import Skils from './Components/Skils';
 
 const page = () => {
+
   return (
-    <div className='text-black'>
+    <div className='text-black flex flex-col'>
       <Hero />
-      <Skils />
-      <Projects />
-      <MyStroy />
-      <Footer />
+      <div id='scroll'>
+        <Skils />
+        <Projects />
+        <MyStroy />
+        <Footer />
+      </div>
     </div>
   )
 }

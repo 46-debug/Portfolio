@@ -47,7 +47,7 @@ const Hero = () => {
     }, []);
 
     return (
-        <div id='main' className='bg-cover bg-center bg-[url(/bg.jpg))] flex justify-between flex-col h-[100dvh] font-[Big_Shoulders_Display]'>
+        <div id='main' className='bg-cover w-full bg-center bg-[url(/bg.jpg))] flex justify-between flex-col h-[100dvh] font-[Big_Shoulders_Display]'>
             <div id='header'>
                 <Header />
             </div>
@@ -62,7 +62,7 @@ const Hero = () => {
                 <a className='px-5 py-3 relative hover:border-white transition-all border-2 border-[#CC94C5] cursor-pointer bg-[#6C1854] rounded-full text-white text-4xl font-bold' href="mailto:sumit8t6t@gmail.com" >Hire Me
                     <img id='star' className='absolute w-[35px] top-[0%] right-[0%] -translate-x-1/2 -translate-y-1/2' src="star.svg" alt="" />
                 </a>
-                <a className='px-5 py-3 hover:border-white transition-all border-2 border-[#CC94C5] cursor-pointer bg-[#6C1854] rounded-full text-white text-4xl font-bold' target='#' href='https://drive.google.com/file/d/1C7cCN36ZyMZV5GO4c4MDTOR7c8B-YQ8C/view?usp=sharing' >View Resume</a>
+                <a className='px-5 py-3 hover:border-white transition-all border-2 border-[#CC94C5] cursor-pointer bg-[#6C1854] rounded-full text-white text-4xl font-bold' target='#' href='https://drive.google.com/file/d/1FNP_mUqvsto3GhJpappzsk0pK1RVfAIW/view?usp=drivesdk' >View Resume</a>
             </div>
             <div className='stars'>
                 <img id='star' className='absolute sm:w-[63px] w-[40px] top-[35%] left-[16%] -translate-x-1/2 -translate-y-1/2' src="star.svg" alt="" />
