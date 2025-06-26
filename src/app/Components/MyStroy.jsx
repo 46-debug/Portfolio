@@ -4,9 +4,15 @@ import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const MyStroy = () => {
-  const [audio] = useState(new Audio("/when i was.mp3"));
   const [playing, setPlaying] = useState(false);
   const [value, setValue] = useState(0);
+  const [audio, setAudio] = useState(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setAudio(new Audio("/when i was.mp3"));
+    }
+  }, []);
 
   gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -41,6 +47,9 @@ const MyStroy = () => {
   }, []);
 
   const playAudio = () => {
+
+    if (!audio) return;
+
     if (!playing) {
       audio.play();
     } else {
