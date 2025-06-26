@@ -4,6 +4,9 @@ import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const MyStroy = () => {
+  const [audio] = useState(new Audio("/when i was.mp3"));
+  const [playing, setPlaying] = useState(false);
+  const [value, setValue] = useState(0);
 
   gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -14,9 +17,9 @@ const MyStroy = () => {
         start: "top bottom",
         end: "top 15%",
         scrub: 1,
+        // markers:true
       },
     });
-
     tl.from("#start", {
       y: "-30vw",
       duration: 0.7,
@@ -37,14 +40,35 @@ const MyStroy = () => {
     })
   }, []);
 
+  const playAudio = () => {
+    if (!playing) {
+      audio.play();
+    } else {
+      audio.pause();
+    }
+    setPlaying(!playing);
+  }
 
+  useEffect(() => {
+    let interval;
+
+    if (playing) {
+      interval = setInterval(() => {
+        setValue(prev => (prev < 53 ? prev + 1 : prev));
+      }, 1000);
+    }
+
+    return () => clearInterval(interval);
+  }, [playing]);
 
   return (
-    <div id='main_3' className='font-[Big_Shoulders_Display] overflow-hidden py-10 sm:px-[10vw] px-0 gap-7 flex flex-col items-center justify-center relative min-h-screen bg-[#2A2A2A]'>
+    <div id='main_3' className='font-[Big_Shoulders_Display] relative overflow-hidden py-10 sm:px-[10vw] px-0 gap-7 flex flex-col items-center justify-center min-h-screen bg-[#2A2A2A]'>
 
-      <div id='start' className='flex z-10 gap-5'>
-        <h1 className='px-4 py-1 border border-white text-white text-2xl bg-[#2A2A2A] font-semibold'>My Story</h1>
-        <button className='px-4 py-1 border-[#FF96DF] border hover:bg-[#42243a] cursor-pointer bg-[#6C1854]'><img src="speaker.svg" alt="" /></button>
+      <input style={{ top: "53px" }} className={`absolute w-full custom-range`} type="range" min="0" max="53" value={value} onChange={(e) => setValue(e.target.value)} />
+
+      <div className='flex z-10 gap-5'>
+        <h1 id='start' className='px-4 py-1 border border-white text-white text-2xl bg-[#2A2A2A] font-semibold'>My Story</h1>
+        <button onClick={playAudio} className='px-4 py-1 border-[#FF96DF] border hover:bg-[#42243a] cursor-pointer bg-[#6C1854]'><img src={playing ? "offSpeaker.svg" : "speaker.svg"} alt="" /></button>
       </div>
       <p id='bent1' className='text-right text-white px-5 text-2xl'>When I was a kid, I used to wonder how the UI of phones and apps was made. I was fascinated by the design and wanted to create such interfaces myself.
         But due to a lack of knowledge and resources at the time, I couldn’t pursue it further and eventually stopped thinking about it.

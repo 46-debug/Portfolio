@@ -11,25 +11,25 @@ const Footer = () => {
         const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: "#main_5",
-                start: "top 95%",
-                end: "top 45%",
-                scrub: 2,
+                start: "top 90%",
+                end: "top 30%",
+                scrub:2
             },
         });
 
         tl.from("#heading", {
-            y: "-100%",
-            duration: .5,
+            y: "-200%",
+            duration: 1,
         })
         tl.from("#links",{
             y:"-100%",
             duration:1,
-            stagger:.7
+            stagger:.8
         })
     }, []);
 
     return (
-        <div id='main_5' className='bg-[#2A2A2A]'>
+        <div id='main_5' className='bg-[#2A2A2A] '>
             <div className='bg-white overflow-hidden rounded-t-3xl relative flex flex-col items-center justify-center px-5 py-5 gap-10 font-[Big_Shoulders_Display]'>
                 <h1 id='heading' className=' text-center mt-10 sm:text-8xl text-6xl font-bold'>I LOOK FORWARD TO
                     <span> SERVING</span> YOU !
