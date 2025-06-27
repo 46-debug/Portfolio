@@ -6,12 +6,29 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 const MyStroy = () => {
   const [playing, setPlaying] = useState(false);
   const [audio, setAudio] = useState(null);
+  const progressTween = useRef(null);
 
   useEffect(() => {
-    const newAudio = new Audio(`${window.location.origin}/when i was.mp3`);
+    const newAudio = new Audio("/when_i_was.mp3");
     newAudio.volume = 1;
     setAudio(newAudio);
   }, []);
+
+  useEffect(() => {
+    if (!audio) return;
+
+    const handleEnded = () => {
+      progressTween.current?.pause(0);
+      gsap.set("#progress", { width: "0%" });
+      setPlaying(false);
+    };
+
+    audio.addEventListener("ended", handleEnded);
+
+    return () => {
+      audio.removeEventListener("ended", handleEnded);
+    };
+  }, [audio]);
 
   gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -44,24 +61,6 @@ const MyStroy = () => {
       duration: 0.7,
     })
   }, []);
-
-  const progressTween = useRef(null);
-
-  useEffect(() => {
-    if (!audio) return;
-
-    const handleEnded = () => {
-      progressTween.current?.pause(0);
-      gsap.set("#progress", { width: "0%" });
-      setPlaying(false);
-    };
-
-    audio.addEventListener("ended", handleEnded);
-
-    return () => {
-      audio.removeEventListener("ended", handleEnded);
-    };
-  }, [audio]);
 
   const playAudio = () => {
     if (!audio) return;
