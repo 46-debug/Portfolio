@@ -47,7 +47,7 @@ const Hero = () => {
     }, []);
 
     return (
-        <div id='main' className='bg-cover w-full bg-center bg-[url(/bg.jpg))] flex justify-between flex-col h-[100dvh] font-[Big_Shoulders_Display]'>
+        <div id='main' className='bg-cover fixed w-full bg-center bg-[url(/bg.jpg))] flex justify-between flex-col h-[100dvh] font-[Big_Shoulders_Display]'>
             <div id='header'>
                 <Header />
             </div>

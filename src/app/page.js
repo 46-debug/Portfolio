@@ -11,7 +11,7 @@ const page = () => {
   return (
     <div className='text-black flex flex-col'>
       <Hero />
-      <div id='scroll'>
+      <div className='translate-y-[100vh]'>
         <Skils />
         <Projects />
         <MyStroy />

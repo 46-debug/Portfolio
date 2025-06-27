@@ -1,17 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const MyStroy = () => {
   const [playing, setPlaying] = useState(false);
-  const [value, setValue] = useState(0);
   const [audio, setAudio] = useState(null);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      setAudio(new Audio("/when i was.mp3"));
-    }
+    setAudio(new Audio("/when i was.mp3"));
   }, []);
 
   gsap.registerPlugin(ScrollTrigger, useGSAP);
@@ -46,34 +43,53 @@ const MyStroy = () => {
     })
   }, []);
 
-  const playAudio = () => {
-
-    if (!audio) return;
-
-    if (!playing) {
-      audio.play();
-    } else {
-      audio.pause();
-    }
-    setPlaying(!playing);
-  }
+  const progressTween = useRef(null);
 
   useEffect(() => {
-    let interval;
+    if (!audio) return;
 
-    if (playing) {
-      interval = setInterval(() => {
-        setValue(prev => (prev < 53 ? prev + 1 : prev));
-      }, 1000);
+    const handleEnded = () => {
+      progressTween.current?.pause(0);
+      gsap.set("#progress", { width: "0%" });
+      setPlaying(false);
+    };
+
+    audio.addEventListener("ended", handleEnded);
+
+    return () => {
+      audio.removeEventListener("ended", handleEnded);
+    };
+  }, [audio]);
+
+  const playAudio = () => {
+    if (!audio) return;
+
+    if (!progressTween.current) {
+      progressTween.current = gsap.to("#progress", {
+        width: "100%",
+        duration: 53,
+        ease: "none",
+        paused: true,
+      });
     }
 
-    return () => clearInterval(interval);
-  }, [playing]);
+    if (!playing) {
+      progressTween.current.play();
+      audio.play();
+    } else {
+      progressTween.current.pause();
+      audio.pause();
+    }
+
+    setPlaying(!playing);
+  };
 
   return (
     <div id='main_3' className='font-[Big_Shoulders_Display] relative overflow-hidden py-10 sm:px-[10vw] px-0 gap-7 flex flex-col items-center justify-center min-h-screen bg-[#2A2A2A]'>
 
-      <input style={{ top: "53px" }} className={`absolute w-full custom-range`} type="range" min="0" max="53" value={value} onChange={(e) => setValue(e.target.value)} />
+      <div className='absolute top-[59px] w-full flex items-center h-1.5 bg-[#6d6d6d]'>
+        <div id='progress' className='w-[0%] rounded-r-full h-1 bg-[#6C1854]'></div>
+      </div>
 
       <div className='flex z-10 gap-5'>
         <h1 id='start' className='px-4 py-1 border border-white text-white text-2xl bg-[#2A2A2A] font-semibold'>My Story</h1>
