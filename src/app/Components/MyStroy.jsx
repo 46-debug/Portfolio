@@ -8,7 +8,9 @@ const MyStroy = () => {
   const [audio, setAudio] = useState(null);
 
   useEffect(() => {
-    setAudio(new Audio("/when i was.mp3"));
+    const newAudio = new Audio(`${window.location.origin}/when i was.mp3`);
+    newAudio.volume = 1;
+    setAudio(newAudio);
   }, []);
 
   gsap.registerPlugin(ScrollTrigger, useGSAP);
